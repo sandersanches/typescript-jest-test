@@ -1,0 +1,160 @@
+Olá Mundo - Testando Git
+
+Link da aula:
+https://www.youtube.com/watch?v=kB5e-gTAl_s
+
+Anotações:
+
+Iniciando Git: apos instalar o git, clicando com o botão direito, abra o gitbash na pasta em que deseja versionar.
+
+  git init  			  // COMANDO PARA INICIAR O GIT
+	git status  			// COMANDO PARA VERIFICAR ALTERAÇÕES
+
+Para adicionar um unico arquivo à lista de arquivos a serem preparados para o versionamento (commit), digite o comando abaixo:
+
+	git add "meu codigo.txt" 	// NESTE CASO O ARQUIVO A SER ADICIONADO É "meu codigo.txt"
+
+Para adicionar todos os arquivos ao mesmo tempo à lista de arquivos a serem preparados para o versionamento, digite o comando abaixo:
+
+	git add .			// ADICIONA TODOS OS ARQUIVOS QUE FORAM ATUALIZADO À LISTA DE ARQUIVOS PARA VERSIONAMENTO
+
+Criando a primeira versão do código:
+
+	git commit -m "commit inicial"	// COLOCAMOS ENTRE ASPAS DUPLAS COMENTARIO DESCREVENDO AS ALTERAÇÕES DA VERSÃO
+					// POR PADRÃO, O PRIMEIRO COMMIT INSERIMOS A DESCRIÇÃO DE COMMIT INICIAL
+
+Ao digitar o comando pela primeira vez, será necessário configurar o usuário. Esta configuração poderá ser feita de forma global, utilizando os comandos:
+Configurando de forma Global:
+
+  git config --global user.email "you@example.com"	// CONFIGURANDO O E-MAIL
+  git config --global user.name "Your Name"		// CONFIGURANDO O USUÁRIO
+
+Configurando apenas no repositório atual(necessário omitir --global):
+
+  git config user.email "you@example.com"			// CONFIGURANDO O E-MAIL
+  git config user.name "Your Name"			// CONFIGURANDO O USUÁRIO
+
+Apos configurar email e usuário, digite novamente o comando para 'commitar o código':
+
+	git commit -m "commit inicial"
+
+
+ENVIANDO O PROJETO PARA O GIT HUB
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
+Após criar um repositório no github, copie o endereço do repositório e digite o seguinte
+código no terminal para configurar o endereço que o projeto deverá ser enviado:
+
+	git remote add origin https://github.com/sandersanches/project-1_git-test 	// exemplo
+
+Para confirmar o envio ao digite o comando:
+
+	git push
+
+um comentário aparecerá no terminal, solicitando que o comando abaixo seja digitado:
+
+	git push --set-upstream origin master
+
+Ao digita-lo, abrirá uma caixa de texto solicitando a o login do github.
+Ao fazer login ou outorizaro o acesso pelo browser, o projeto será enviado ao git hub.
+
+GERINDO VERSÕES DO PROJETO
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
+Para verificar as versões do projeto, digite o comando:
+	git reflog
+
+Para recuperar uma versão, verifique as versões do projeto,
+utilizando o comando git reflog e copie o código da versão que deseja recuperar.
+Para recuerar a versão, digite o comando:
+
+	git reset --hard CÓDIGO
+	ex.: git reset --hard adfebe7
+
+Utilizando o mesmo comando podemos retornar a versão mais atual. bastando apenas digitar o código da versão:
+
+
+BRANCH
+¨¨¨¨¨¨
+
+- Para visualizar as branch's disponíveis no momento, digite o comando:
+
+	git branch
+
+Observer que uma das branch's estarão acompanhadas de um asterisco e grifada.
+Esta é a branch selecionada no momento. e todas as modificações e commits serão
+realizadas nesta branch
+
+- criando uma nova Branch com o nome staging:
+
+	git branch NOME_DA_BRANCH
+	ex.: git branch staging
+
+- Para mudar de branch, digite o comando:
+
+	git checkout NOME_DA_BRANCH
+	ex.: git checkout staging
+
+
+Apos selecionar a branch, fazer commit, ao enviar tentar enviar projeto para o servidor,
+o git irá solicitar que seja digitado um novo código:
+
+Ex.: 	git commit -m "testando branchs"
+	git push
+	git push --set-upstream origin staging
+
+podemos observar a nova branch no github
+
+
+TRANSFERINDO CÓDIGO DE UMA BRANCH SECUNDÁRIA PARA A BRANCH MASTER
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
+- Entre na branch que deseja trazer o código. no nosso caso, a branch master
+
+	git checkout master
+
+- Faça o UPLOAD da última versão do projeto:
+
+	git pull
+
+ATENÇÃO: Esta é uma etapa crucial quando trabalhamos em equipe. pois, caso não seja realizada,
+voce poderá estar atualizando uma versão antiga.
+
+- traga o código da branch secundária (no nosso caso se chama staging) para a
+  branch selecionada (no nosso caso se chama master):
+
+	git merge staging
+
+- agora as alterações realizadas na branch marging foram enviadas para a branch principal.
+
+
+FLUXO PARA TRABALHAR COM BRANCH'S
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
+01 - git checkout master 		// ENTRE NA BRANCH MASTER
+02 - git pull				// REALIZAR UPLOAD DA ULTIMA VERSÃO DA BRANCH MASTER
+03 - git branch NOME_DA_BRANCH		// GERAR UMA NOVA BRANCH A PARTIR DA BRANCH PRINCIPAL
+04 - git checkout NOME_DA_BRANCH 	// LOGAR NA BRANCH RECEM CRIADA
+05 - 					// REALIZAR TODAS AS MODIFICAÇÕES E TESTE NECESSÁRIOS
+06 - git add . 				// ADICIONE AS MODIFICAÇÕES À NOVA BRANCH
+07 - git commit -m "testando branchs"	// COMMITAR A BRANCH COM AS NOVAS ALTERAÇÕES
+08 - git checkout master		// ENTRE NOVAMENTE NA BRANCH PRINCIPAL
+09 - git pull				// REALIZAR NOVAMENTE O UPLOAD, PARA GARANTIR A ÚLTIMA VERSÃO
+10 - git merge NOME_DA_BRANCH		// ENVIE O CÓDIGO PARA A BRANCH PRINCIPAL
+11 - git push				// ENVIE O CÓDIGO ATUALIZADO PARA O SERVIDOR
+
+
+ATALHO PARA CRIAR UMA NOVA BRANCH E BASEADO EM OUTRA BRANCH
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+comando:
+	git checkout -b NOME_DA_BRANCH_A_SER_CRIADA NOME_DA_BRANCH_A_SER_COPIADA
+
+	ex.:  git checkout -b sitema-de-login master
+
+
+REVIÃO DE PROJETO PARA APROVAÇÃO E MERGE
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
+
+
+
