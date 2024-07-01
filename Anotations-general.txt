@@ -1,0 +1,55 @@
+Paconte instalados:
+
+  - JEST, TS-JEST E @TYPES/JEST -D:
+    npm i jest -D
+    npm i ts-jest -D
+    npm i @types/jest -D
+
+    ou
+
+    npm i jest ts-jest @types/jest -D
+
+
+Inicializando o JEST:
+  npx jest --init     //Inicializar o JEST
+
+  Configurações Utilizadas:
+    √ Would you like to use Jest when running "test" script in "package.json"? ... yes
+    √ Would you like to use Typescript for the configuration file? ... yes
+    √ Choose the test environment that will be used for testing » node
+    √ Do you want Jest to add coverage reports? ... no
+    √ Which provider should be used to instrument code for coverage? » v8
+    √ Automatically clear mock calls, instances, contexts and results before every test? ... no
+
+  Apague o arquivo jest.config.ts
+
+  Inicialize o ts-jest:
+
+    npx ts-jest config:init
+
+    O arquivo jest.config.ts será criado
+
+Executnado JEST:
+  npx jest
+
+Convenção na nomeclatura dos arquivos de teste:
+
+  nomeDoArquivo.spec.ts       // Teste de arquivos unitários
+  nomeDoArquivo.test.ts       // Teste de arquivos de integração
+
+  Dentro dos arquivos de teste, podemos separar cada teste em blocos. e podemos nomea-los de duas maneiras:
+
+    it('descrção do teste (IT)', () => {}'); //
+    teste('descrção do teste (TESTE)', () => {}'); //
+
+Comandos para executar o JEST:
+
+  npx jest                    // Comando Padrão
+
+  Em package,json, em script, insira os scripts:
+
+    // atalho para executar o npx jest. Agora podemos digitar npm test e o mesmo comando será executado
+    "test": "jest"
+
+    // Ao executar npm test:silent ocorrerá o monitormanto em termpo real do jest, sem StackTrace.
+    "test:silent" : "jest --watchAll --silent --noStackTrace"
