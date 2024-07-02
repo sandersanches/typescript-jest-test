@@ -1,5 +1,7 @@
-export default class Messaging {
+import { MessagingProtocol } from '../classes/interfaces/messaging-protocol';
+
+export class Messaging implements MessagingProtocol {
   sendMessage(msg: string): void {
-    console.log('Message sent: ' + msg);
+    console.log('Mensagem enviada:', msg);
   }
 }

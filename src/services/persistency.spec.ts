@@ -1,23 +1,25 @@
-describe('Testanto jest IT / TEST - TESTE OK', () => {
-  it('descrição do teste (IT)', () => {
-    const number = 1;
-    expect(number).toBe(1);
+import Persistency from './persistency';
+
+describe('Persistency', () => {
+  afterEach(() => jest.clearAllMocks()); //Limpar os mocks após cada teste
+
+  it('should retturn undefined', () => {
+    // System under test -> é a classe principal que está sendo testada
+    const sut = new Persistency();
+    expect(sut.saveOrder()).toBeUndefined();
   });
 
-  //   test('descrição do teste (TESTE)', () => {
-  //     const nome = 'Sander';
-  //     expect(nome).toBe('Sander');
-  //   });
-  // });
+  it('should call console.log once', () => {
+    const sut = new Persistency();
+    const consoleSpy = jest.spyOn(console, 'log');
+    sut.saveOrder();
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+  });
 
-  // describe('Testanto jest IT / TEST - TESTE NOK', () => {
-  //   it('descrição do teste (IT)', () => {
-  //     const number = 1;
-  //     expect(number).not.toBe(1);
-  //   });
-
-  //   test('descrição do teste (TESTE)', () => {
-  //     const nome = 'Sander';
-  //     expect(nome).not.toBe('Sander');
-  //   });
+  it('should call console.log with "Pedido salvo com sucesso..."', () => {
+    const sut = new Persistency();
+    const consoleSpy = jest.spyOn(console, 'log');
+    sut.saveOrder();
+    expect(consoleSpy).toHaveBeenCalledWith('Pedido salvo com sucesso...');
+  });
 });
