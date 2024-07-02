@@ -7,7 +7,7 @@ const createSut = (name: string, price: number): Product => {
 describe('Product', () => {
   afterEach(() => jest.clearAllMocks()); //Limpar os mocks após cada teste
 
-  it('should retturn undefined', () => {
+  it('should have propeties name and price', () => {
     // System under test -> é a classe principal que está sendo testada
     const sut = createSut('Camiseta', 49.9);
     expect(sut).toHaveProperty('name', 'Camiseta');
