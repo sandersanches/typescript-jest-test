@@ -26,6 +26,10 @@ export default class ShoppingCart {
     return this.discount.calculate(this.total());
   }
 
+  isEmpty(): boolean {
+    return this._itens.length === 0;
+  }
+
   clear() {
     console.log('O carrinho de compras foi limpo');
     this._itens.length = 0;
