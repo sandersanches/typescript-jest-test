@@ -53,3 +53,15 @@ Comandos para executar o JEST:
 
     // Ao executar npm test:silent ocorrerá o monitormanto em termpo real do jest, sem StackTrace.
     "test:silent" : "jest --watchAll --silent --noStackTrace"
+
+Realizando Teste coverage (Cobertura de teste)
+
+  Comando:
+    npx jest --coverage
+
+  // Apos realizar o teste, uma pasta com o nome coverage é gerada com os relatórios do teste.
+  // na subpasta Icov-report possui um arquivo index.html, que contem as informações detalhadas dos testes.
+
+  Tambem podemos inserir o teste em package, para facilitar nos próximos relatórios:
+    Em package.json, insrira o script:
+      "test:coverage" : "jest --coverage --silent --noStackTrace"
