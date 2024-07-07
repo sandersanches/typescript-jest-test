@@ -1,11 +1,11 @@
 import {
-  ICustomerOrder,
-  IEnterpriseCustumerProtocol,
-  IIndividualCustumerProtocol,
-} from './interfaces/costumer-protocol';
+  CustomerOrderprotocol,
+  EnterpriseCustumerProtocol,
+  IndividualCustumerProtocol,
+} from './interfaces/custumer-protocol';
 
 export class IndivivualCustumer
-  implements IIndividualCustumerProtocol, ICustomerOrder
+  implements IndividualCustumerProtocol, CustomerOrderprotocol
 {
   firstName: string;
   lastName: string;
@@ -27,7 +27,7 @@ export class IndivivualCustumer
 }
 
 export class EnterpriseCustumer
-  implements IEnterpriseCustumerProtocol, ICustomerOrder
+  implements EnterpriseCustumerProtocol, CustomerOrderprotocol
 {
   name: string;
   cnpj: string;

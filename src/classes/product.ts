@@ -1,6 +1,6 @@
-import ICartItens from './interfaces/cart-itens';
+import { CartItemsProtocol } from './interfaces/cart-itens-protocol';
 
-export default class Product implements ICartItens {
+export class Product implements CartItemsProtocol {
   constructor(
     public name: string,
     public price: number,

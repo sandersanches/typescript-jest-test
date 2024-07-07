@@ -1,4 +1,4 @@
-import Persistency from './persistency';
+import { Persistency } from './persistency';
 
 describe('Persistency', () => {
   afterEach(() => jest.clearAllMocks()); //Limpar os mocks após cada teste

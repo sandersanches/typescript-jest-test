@@ -1,8 +1,8 @@
-import Messaging from './services/messaging';
-import Order from './classes/order';
-import Persistency from './services/persistency';
-import Product from './classes/product';
-import ShoppingCart from './classes/shopping-cart';
+import { Messaging } from './services/messaging';
+import { Order } from './classes/order';
+import { Persistency } from './services/persistency';
+import { Product } from './classes/product';
+import { ShoppingCart } from './classes/shopping-cart';
 import { TenPercentDiscount } from './classes/discount';
 import { EnterpriseCustumer } from './classes/custumer';
 
@@ -29,16 +29,16 @@ const order = new Order(
   enterpriseCustumer,
 );
 
-shoppingCart.addItens(new Product('melão', 13.25));
-shoppingCart.addItens(new Product('maça', 9.5587));
-shoppingCart.addItens(new Product('pera', 6.0));
-shoppingCart.addItens(new Product('uva', 12.0));
+shoppingCart.addItem(new Product('melão', 13.25));
+shoppingCart.addItem(new Product('maça', 9.5587));
+shoppingCart.addItem(new Product('pera', 6.0));
+shoppingCart.addItem(new Product('uva', 12.0));
 shoppingCart.removeItem(1);
 
-console.log(shoppingCart.itens);
+console.log(shoppingCart.items);
 console.log(shoppingCart.total());
-console.log(shoppingCart.totalWithDiscount());
+console.log(shoppingCart.totalWithDicount());
 
 order.checkout();
-console.log(shoppingCart.itens);
+console.log(shoppingCart.items);
 console.log(order.orderStatus);

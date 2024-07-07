@@ -1,37 +1,38 @@
 import { Discount } from './discount';
-import ICartItens from './interfaces/cart-itens';
+import { CartItemsProtocol } from './interfaces/cart-itens-protocol';
+import { ShoppingCartProtocol } from './interfaces/shoping-cart-protocol';
 
-export default class ShoppingCart {
-  private readonly _itens: ICartItens[] = [];
+export class ShoppingCart implements ShoppingCartProtocol {
+  private readonly _items: CartItemsProtocol[] = [];
 
   constructor(private readonly discount: Discount) {}
 
-  addItens(item: ICartItens) {
-    this._itens.push(item);
+  addItem(item: CartItemsProtocol) {
+    this._items.push(item);
   }
 
   removeItem(index: number) {
-    this._itens.splice(index, 1);
+    this._items.splice(index, 1);
   }
 
-  get itens(): ICartItens[] {
-    return this._itens;
+  get items(): CartItemsProtocol[] {
+    return this._items;
   }
 
   total(): number {
-    return +this._itens.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+    return +this._items.reduce((sum, item) => sum + item.price, 0).toFixed(2);
   }
 
-  totalWithDiscount(): number {
+  totalWithDicount(): number {
     return this.discount.calculate(this.total());
   }
 
   isEmpty(): boolean {
-    return this._itens.length === 0;
+    return this._items.length === 0;
   }
 
   clear() {
     console.log('O carrinho de compras foi limpo');
-    this._itens.length = 0;
+    this._items.length = 0;
   }
 }

@@ -1,17 +1,17 @@
-import OrderStatus from './interfaces/order-status';
-import ShoppingCart from './shopping-cart';
-import Messaging from '../services/messaging';
-import Persistency from '../services/persistency';
-import { ICustomerOrder } from './interfaces/costumer-protocol';
+import { OrderStatus } from './interfaces/order-status';
+import { ShoppingCartProtocol } from './interfaces/shoping-cart-protocol';
+import { Messaging } from '../services/messaging';
+import { Persistency } from '../services/persistency';
+import { CustomerOrderprotocol } from './interfaces/custumer-protocol';
 
-export default class Order {
+export class Order {
   private _orderStatus: OrderStatus = 'opened';
 
   constructor(
-    private readonly cart: ShoppingCart,
+    private readonly shoppingCart: ShoppingCartProtocol,
     private readonly messaging: Messaging,
     private readonly persistency: Persistency,
-    private readonly custumer: ICustomerOrder,
+    private readonly custumer: CustomerOrderprotocol,
   ) {}
 
   get orderStatus(): 'opened' | 'closed' {
@@ -25,16 +25,17 @@ export default class Order {
     }
     this._orderStatus = 'closed';
     this.messaging.sendMessage(
-      `O seu pedido com o total de ${this.cart.total()} foi recebido.`,
+      `O seu pedido com o total de ${this.shoppingCart.total()} foi recebido.`,
     );
     this.persistency.saveOrder();
-    this.cart.clear();
+    this.shoppingCart.clear();
     console.log(
       `O Cliente é ${this.custumer.getName()} - ${this.custumer.getIDN()}`,
     );
   }
 
   private isEmpty(): boolean {
-    return this.cart.itens.length === 0;
+    // return this.shoppingCart.items.length === 0;
+    return this.shoppingCart.isEmpty();
   }
 }

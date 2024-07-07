@@ -1,6 +1,6 @@
 import { TenPercentDiscount } from './discount';
-import ShoppingCart from './shopping-cart';
-import ICartItens from './interfaces/cart-itens';
+import { ShoppingCart } from './shopping-cart';
+import { CartItemsProtocol } from './interfaces/cart-itens-protocol';
 
 const createDiscountMock = () => {
   class DiscountMock extends TenPercentDiscount {}
@@ -14,7 +14,7 @@ const createSut = () => {
 };
 
 const createCartItems = (name: string, price: number) => {
-  class CartItems implements ICartItens {
+  class CartItems implements CartItemsProtocol {
     constructor(
       public name: string,
       public price: number,
@@ -28,8 +28,8 @@ const createSutWithCartItems = () => {
   const cartItem1 = createCartItems('maça', 4);
   const cartItem2 = createCartItems('banana', 6);
 
-  sut.addItens(cartItem1);
-  sut.addItens(cartItem2);
+  sut.addItem(cartItem1);
+  sut.addItem(cartItem2);
 
   return { discountMock, sut };
 };
@@ -46,28 +46,28 @@ describe('ShoppingCart', () => {
   it('should have 2 cart items', () => {
     const { sut } = createSutWithCartItems();
 
-    expect(sut.itens.length).toBe(2);
+    expect(sut.items.length).toBe(2);
   });
 
   it('should teste total and totalWithDiscount', () => {
     const { sut } = createSutWithCartItems();
 
     expect(sut.total()).toBe(10);
-    expect(sut.totalWithDiscount()).toBe(9);
+    expect(sut.totalWithDicount()).toBe(9);
   });
 
   it('should add cartItems and clear cart', () => {
     const { sut } = createSutWithCartItems();
-    expect(sut.itens.length).toBe(2);
+    expect(sut.items.length).toBe(2);
     sut.clear();
-    expect(sut.itens.length).toBe(0);
+    expect(sut.items.length).toBe(0);
     expect(sut.isEmpty()).toBe(true);
   });
 
   it('should remove cartItems', () => {
     const { sut } = createSutWithCartItems();
     sut.removeItem(1);
-    expect(sut.itens.length).toBe(1);
+    expect(sut.items.length).toBe(1);
     sut.removeItem(0);
     expect(sut.isEmpty()).toBe(true);
   });
@@ -75,14 +75,14 @@ describe('ShoppingCart', () => {
   it('should call discount.calculate once when totalWhithDiscount is called', () => {
     const { sut, discountMock } = createSutWithCartItems();
     const discountMockSpy = jest.spyOn(discountMock, 'calculate');
-    sut.totalWithDiscount();
+    sut.totalWithDicount();
     expect(discountMockSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should call discount.calculate with total price when totalWhithDiscount is called', () => {
     const { sut, discountMock } = createSutWithCartItems();
     const discountMockSpy = jest.spyOn(discountMock, 'calculate');
-    sut.totalWithDiscount();
+    sut.totalWithDicount();
     expect(discountMockSpy).toHaveBeenCalledWith(sut.total());
   });
 });

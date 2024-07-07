@@ -1,3 +1,1 @@
-type OrderStatus = 'opened' | 'closed';
-
-export default OrderStatus;
+export type OrderStatus = 'opened' | 'closed';
